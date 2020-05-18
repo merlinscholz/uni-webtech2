@@ -1,0 +1,149 @@
+input:focus{
+    outline:0;
+}
+button{
+    font-family: inherit;
+}
+button:focus{
+    outline: 0;
+}
+html,body{
+    margin:0;
+    padding:0;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 400;
+    color:#333;
+    line-height:21px;
+    font-size:16px;
+    min-width: 960px;
+}
+a{
+    color:#00e641;
+}
+.bg{
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:400px;
+    background: url("assets/bg.jpg") no-repeat center center;
+    background-size: cover;
+}
+.wrapper{
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    width:400px;
+    background: #fff;
+}
+.login-form, .register-form{
+    display:block;
+    width:340px;
+    position:absolute;
+    top:50%;
+    margin-top: -170px;
+    height:200px;
+    padding:20px;
+}
+.register-form{
+    margin-top: -70px;
+}
+.login-form h1, .register-form h1{
+    font-weight: 400;
+    color:#00e641;
+    margin:0 0 50px 0;
+}
+.login-form input, .register-form input{
+    border:solid 1px #000;
+    background: #fff;
+    color:#000;
+    padding:8px;
+    margin:15px 0;
+    display: block;
+    width: 100%;
+}
+.login-form input.error, .register-form input.error {
+    border:solid 1px #f00;
+}
+.login-form button, .register-form button{
+    background: #333;
+    color:#fff;
+    font-weight: 700;
+    border:none;
+    padding:8px 20px;
+    cursor: pointer;
+}
+.login-form p, .register-form p{
+    font-size: 12px;
+}
+footer{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    display: flex;
+
+}
+footer .copyright{
+    flex:2;
+    font-size: 11px;
+    color:#999;
+    padding:10px 10px 20px 10px;
+
+}
+footer .logo{
+    flex:1;
+    text-align: right;
+    font-size: 28px;
+    color:#00e641;
+    padding:10px 10px 20px 10px;
+
+}
+.errormessage{
+    font-size: 12px;
+    color:#f00;
+    margin-bottom: 10px;
+}
+.alert, .alertbg, .errormessage{display:none}
+.errormessage.error{
+    display:block;
+}
+.alertbg{
+    background: rgba(255,255,255,.6);
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+}
+.alert{
+    display:none;
+    position:fixed;
+    top:50%;
+    left:50%;
+    margin-left:-210px;
+    margin-top:-110px;
+    height:200px;
+    width:400px;
+    padding:20px;
+    background: #fff;
+    border:solid 1px #000;
+}
+.alert span{
+    font-size: 18px;
+    color: #00e641;
+    display:block;
+}
+.alert a{
+    display:inline-block;
+    background: #333;
+    color:#fff;
+    font-weight: 700;
+    border:none;
+    padding:8px 20px;
+    position: absolute;
+    right:15px;
+    bottom:15px;
+    text-decoration: none;
+}

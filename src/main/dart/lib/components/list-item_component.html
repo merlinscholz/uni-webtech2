@@ -1,0 +1,114 @@
+<div class="list-item" [class.done]="item.done" *ngIf="item!=null">
+    <div class="list-item-compact">
+        <span (click)="toggleDone();$event.stopPropagation()" class="checkbox" >
+            <svg viewBox="0 0 24 24" *ngIf="!item.done">
+                <path fill="#cccccc" d="M12 1c-6.1 0-11 4.9-11 11s4.9 11 11 11 11-4.9 11-11-4.9-11-11-11zM12 21c-5 0-9-4-9-9s4-9 9-9c5 0 9 4 9 9s-4 9-9 9z"></path>
+            </svg>
+            <svg viewBox="0 0 24 24" *ngIf="item.done">
+                <path fill="#70BE39" d="M22 10.1c-0.6 0-1 0.4-1 1v0.9c0 5-4 9-9 9 0 0 0 0 0 0-5 0-9-4-9-9s4-9 9-9c0 0 0 0 0 0 1.3 0 2.5 0.3 3.7 0.8 0.5 0.2 1.1 0 1.3-0.5s0-1.1-0.5-1.3c-1.4-0.6-2.9-1-4.5-1 0 0 0 0 0 0-6.1 0-11 4.9-11 11s4.9 11 11 11c0 0 0 0 0 0 6.1 0 11-4.9 11-11v-0.9c0-0.6-0.4-1-1-1z"></path>
+                <path fill="#70BE39" d="M9.7 10.3c-0.4-0.4-1-0.4-1.4 0s-0.4 1 0 1.4l3 3c0.2 0.2 0.4 0.3 0.7 0.3s0.5-0.1 0.7-0.3l10-10c0.4-0.4 0.4-1 0-1.4s-1-0.4-1.4 0l-9.3 9.3-2.3-2.3z"></path>
+            </svg>
+        </span>
+        <span *ngIf="!editTitle||!expanded" class="list-item-title" (click)="expanded=!expanded">
+            {{item.title}}
+            <a class="no-a" *ngIf="expanded" href="javascript:void(0)" (click)="editTitle=!editTitle;$event.stopPropagation()">
+                <span class="lnr-pencil"></span>
+            </a>
+        </span>
+        <span *ngIf="editTitle&&expanded" class="list-item-title" style="font-size: 0">
+            <form class="quickform" style="display:inline" action="" #editTitleForm="ngForm" (submit)="editTitleSubmit()">
+                <input type="text" value="{{item.title}}" name="title" #editTitleForm="ngForm" [(ngModel)]="itemNewTitle">
+                <button type="submit" [disabled]="itemNewTitle==''">
+                    Change
+                </button>
+            </form>
+        </span>
+        <div class="item-user-info" *ngIf="!expanded">
+            <span *ngIf="item.owner!=username" class="item-user-info">
+                Assigned to you by {{item.owner}}
+            </span>
+            <span *ngIf="item.assignee!=null&&item.assignee!=username" class="item-user-info">
+                You assigned this to: {{item.assignee}}
+            </span>
+        </div>
+        <div class="list-item-tags">
+            <div>
+                <a href="javascript:void(0)" *ngFor="let tag of item.tags" class="no-a tag" style="background:#{{tag.color}}" (click)="selectTag(tag);$event.stopPropagation()" >
+                    <span>
+                        {{tag.name}}
+                    </span>
+                    <a href="javascript:void(0)" class="no-a delete-tag" (click)="removeTag(tag);$event.stopPropagation()">
+                        <span class="lnr-cross"></span>
+                    </a>
+                </a>
+                <form style="display:inline" action="" #addTagForm="ngForm">
+                    <select (change)="addTag()" name="" id="" [(ngModel)]="itemAddTag" #addTagForm="ngForm" *ngIf="expanded">
+                        <option *ngFor="let tag of tags" [ngValue]="tag">{{tag.name}}</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <span class="list-item-delete">
+            <a class="no-a" href="javascript:void(0)" (click)="delete();$event.stopPropagation()">
+                <span class="lnr-cross"></span>
+            </a>
+        </span>
+        <span class="list-item-expand" (click)="expanded=!expanded">
+            <a *ngIf="!expanded" href="javascript:void(0)" class="no-a">
+                <span class="lnr-chevron-right"></span>
+            </a>
+            <a *ngIf="expanded" href="javascript:void(0)" class="no-a">
+                <span class="lnr-chevron-down"></span>
+            </a>
+        </span>
+    </div>
+    <div *ngIf="expanded" class="list-item-expanded">
+        <div *ngIf="!editDescription" class="list-item-description">
+            {{getDescription()}}
+            <a class="no-a" href="javascript:void(0)" (click)="editDescription=!editDescription">
+                <span class="lnr-pencil"></span>
+            </a>
+        </div>
+        <div *ngIf="editDescription" class="list-item-description">
+            <form style="display:inline" action="" #editDescriptionForm="ngForm" (submit)="editDescriptionSubmit()">
+                <textarea [(ngModel)]="itemNewDescription" cols="50" rows="3">
+                    {{getDescription()}}
+                </textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div *ngIf="!editAssignee" class="item-user-info">
+            <p>
+                <span *ngIf="item.owner==username&&(item.assignee==null||item.assignee==username)">
+                    This is an item you created. You can assign it to somebody else.
+                    <a href="javascript:void(0)" class="no-a" (click)="editAssignee=!editAssignee">
+                        <span class="lnr-pencil"></span>
+                    </a>
+                </span>
+                <span *ngIf="item.owner==username&&!(item.assignee==null||item.assignee==username)">
+                    This is an item you created and assigned to {{item.assignee}}. You can assign it to somebody else.
+                    <a href="javascript:void(0)" class="no-a" (click)="editAssignee=!editAssignee">
+                        <span class="lnr-pencil"></span>
+                    </a>
+                </span>
+                <span *ngIf="item.owner!=username">
+                    This item was created by {{item.owner}} and assigned to you. You cannot edit who it is assigned to.
+                </span>
+            </p>
+        </div>
+        <div *ngIf="editAssignee" class="item-user-info">
+            <form class="quickform" #editAssigneeForm="ngForm" (submit)="editAssignSubmit()">
+                <p>
+                    <input type="text" #editAssigneeForm="ngForm" [(ngModel)]="itemNewAssignee" placeholder="Assign to...">
+                    <button type="submit">
+                        Assign
+                    </button>
+                    <a href="javascript:void(0)" (click)="removeAssign()">Remove assignment</a>
+                </p>
+            </form>
+        </div>
+
+        <div class="list-item-created">Created on: {{getCreated()}}</div>
+        <div class="list-item-finished">Marked done on: {{getFinished()}}</div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<header>
+    <div class="logo">
+        <a [routerLink]="['Main']" class="no-a" href="javascript:void(0)">
+            <span class="lnr-layers"></span>
+            <span class="logo-text">tudo</span>
+        </a>
+    </div>
+    <div class="search">
+        <form action="">
+            <span class="lnr-magnifier"></span>
+            <a href="javascript:void(0)" class="no-a" [routerLink]="['Main']"></a>
+        </form>
+    </div>
+    <div class="menu">
+        <a href="javascript:void(0)" class="no-a" [routerLink]="['About']">About</a>
+        <a href="javascript:void(0)" class="no-a" [routerLink]="['Account']">Account</a>
+        <a href="../account/logout.jsp" class="no-a">Logout</a>
+    </div>
+</header>
+<nav>
+    <div class="backlink">
+        <a [routerLink]="['Main']" class="no-a" href="javascript:void(0)">
+            <span class="lnr-chevron-left"></span>
+            <span class="link-text">Back</span>
+        </a>
+    </div>
+</nav>
+<div class="wrapper">
+    <aside class="disabled">
+
+    </aside>
+    <main>
+        <section>
+            <a [routerLink]="['Main']" class="no-a" href="javascript:void(0)">
+                <span class="lnr-chevron-left"></span>
+                Back
+            </a><br><br>
+        </section>
+        <section>
+            <h1>My Account</h1>
+            <p>
+                Username:
+                <span>{{user.username}}</span>
+            </p>
+            <p *ngIf="!editEmail">
+                Email:
+                <input type="text" [(ngModel)]="user.email" disabled>
+                <a href="javascript:void(0)" class="no-a" (click)="editEmail=!editEmail">&nbsp;&nbsp;<span class="lnr-pencil"></span></a>
+            </p>
+            <form *ngIf="editEmail" (submit)="editUser()" #emailForm="ngForm" class="quickform">
+                <p>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" [(ngModel)]="user.email" #emailForm="ngForm" placeholder="Edit Email...">
+                    <button type="submit">
+                        Submit
+                    </button>
+                </p>
+            </form>
+            <p *ngIf="!editPassword">
+                Password:
+                <input type="password" value="pineapple" disabled>
+                <a href="javascript:void(0)" class="no-a" (click)="editPassword=!editPassword">&nbsp;&nbsp;<span class="lnr-pencil"></span></a>
+            </p>
+            <form *ngIf="editPassword" (submit)="editUser()" #passwordForm="ngForm" class="quickform">
+                <p>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" [(ngModel)]="user.password" #passwordForm="ngForm" placeholder="Edit Password...">
+                    <button type="submit">
+                        Submit
+                    </button>
+                </p>
+            </form>
+            <p>
+                <a href="../account/logout.jsp">Logout</a>
+            </p>
+        </section>
+    </main>
+    <div style="flex:0 0 100px;">
+
+    </div>
+</div>

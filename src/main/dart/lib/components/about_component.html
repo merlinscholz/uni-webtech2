@@ -1,0 +1,65 @@
+<header>
+    <div class="logo">
+        <a [routerLink]="['Main']" class="no-a" href="javascript:void(0)">
+            <span class="lnr-layers"></span>
+            <span class="logo-text">tudo</span>
+        </a>
+    </div>
+    <div class="search">
+        <form action="">
+            <span class="lnr-magnifier"></span>
+            <a href="javascript:void(0)" class="no-a" [routerLink]="['Main']"></a>
+        </form>
+    </div>
+    <div class="menu">
+        <a href="javascript:void(0)" class="no-a" [routerLink]="['About']">About</a>
+        <a href="javascript:void(0)" class="no-a" [routerLink]="['Account']">Account</a>
+        <a href="../account/logout.jsp" class="no-a">Logout</a>
+    </div>
+</header>
+<nav>
+    <div class="backlink">
+        <a [routerLink]="['Main']" class="no-a" href="javascript:void(0)">
+            <span class="lnr-chevron-left"></span>
+            <span class="link-text">Back</span>
+        </a>
+    </div>
+</nav>
+<div class="wrapper">
+    <aside class="disabled">
+
+    </aside>
+    <main>
+        <section>
+            <a  [routerLink]="['Main']" class="no-a" href="javascript:void(0)">
+                <span class="lnr-chevron-left"></span>
+                Back
+            </a><br><br>
+        </section>
+        <section>
+            <h1>About TuDo</h1>
+            <p>TuDo is a simple ToDo-List-Webapp based on a Java EE-backend and REST-API, and an AngularDart-frontend.
+                This webapp is a project for <i>Webtech2</i> at the <a href="http://www.tu-dortmund.de/">TU Dortmund</a>.</p>
+            <p>&copy; 2018 <a href="mailto:vanessa.speeth@tu-dortmund.de">Vanessa Speeth</a> &
+                <a href="mailto:merlin.scholz@tu-dortmund.de">Merlin Scholz</a></p>
+        </section>
+        <section>
+            <h1>Technologies used</h1>
+            <ul><li><a target="_blank" href="https://docs.oracle.com/javaee/7/">Java Enterprise Edition 7</a></li>
+                <li><a target="_blank" href="http://wildfly.org/">WildFly Application Server</a></li>
+                <li><a target="_blank" href="https://www.dartlang.org/">Dart Programming Language</a></li>
+                <li><a target="_blank" href="https://maven.apache.org/">Apache Maven</a></li>
+                <li><a target="_blank" href="https://shiro.apache.org/">Apache Shiro</a></li>
+                <li><a target="_blank" href="http://www.h2database.com/html/main.html">H2 Database Engine</a></li>
+                <li><a target="_blank" href="http://hibernate.org/orm/">Hibernate ORM</a></li>
+                <li><a target="_blank" href="https://github.com/jax-rs">JAX RS</a></li>
+                <li><a target="_blank" href="https://crypto.stanford.edu/sjcl/">Stanford Javascript Crypto Library</a></li>
+                <li><a target="_blank" href="https://linearicons.com/free">Linearicons Free</a></li>
+                <li><a target="_blank" href="http://www.justinmaller.com/">Images by Justin Maller</a></li>
+            </ul>
+        </section>
+    </main>
+    <div style="flex:0 0 100px;">
+
+    </div>
+</div>

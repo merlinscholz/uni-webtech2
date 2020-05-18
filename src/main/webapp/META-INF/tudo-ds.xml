@@ -1,0 +1,15 @@
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
+    <datasource jndi-name="java:jboss/datasources/tudo"
+                pool-name="tudo-web" enabled="true"
+                use-java-context="true">
+        <connection-url>jdbc:h2:file:${h2.path};MODE=MSSQLServer;AUTO_SERVER=TRUE</connection-url>
+        <driver>h2</driver>
+        <!--suppress CheckTagEmptyBody -->
+        <security>
+            <user-name>sa</user-name>
+            <password></password>
+        </security>
+    </datasource>
+</datasources>

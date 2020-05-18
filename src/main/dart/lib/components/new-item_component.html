@@ -1,0 +1,24 @@
+<h1>Add task</h1>
+<form class="new-item" (onSubmit)="newItemOnSubmit()" #newItemForm="ngForm">
+    <div class="new-item-main">
+        <input type="text" name="title" autocomplete="off" placeholder="Type here to add an entry..." [(ngModel)]="newItem.title" #title="ngForm">
+        <button type="submit" [class.active]="newItem.title!=''" class="new-item-submit" [disabled]="newItem.title==''" (click)="newItemOnSubmit()">
+            Add
+        </button>
+    </div>
+    <div class="new-item-details" [class.hidden]="newItem.title==''">
+        <div class="new-item-tags">
+            Add Tag:
+            <select (change)="newItemAddTag()" name="" id="" [(ngModel)]="newItemTag" #tag="ngForm">
+                <option *ngFor="let tag of tags" [ngValue]="tag">{{tag.name}}</option>
+            </select>&nbsp;&nbsp;&nbsp;
+            Current Tags:
+            <span *ngFor="let newTag of newItem.tags" class="new-item-tag" style="background:#{{newTag.color}}">
+                {{newTag.name}}
+                <a class="no-a" href="javascript:void(0)" (click)="newItemRemoveTag(newTag)">
+                    <span class="lnr-cross"></span>
+                </a>
+            </span>
+        </div>
+    </div>
+</form>

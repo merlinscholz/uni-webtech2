@@ -1,0 +1,49 @@
+<header>
+    <div class="logo">
+        <a [routerLink]="['Main']" class="no-a" href="javascript:void(0)">
+            <span class="lnr-layers"></span>
+            <span class="logo-text">tudo</span>
+        </a>
+    </div>
+    <div class="search">
+        <form #searchForm="ngForm" (submit)="setSearchFilter()">
+            <span class="lnr-magnifier"></span>
+            <input type="search" #searchForm="ngForm" [(ngModel)]="searchQuery">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="menu">
+        <a href="javascript:void(0)" class="no-a" [routerLink]="['About']">About</a>
+        <a href="javascript:void(0)" class="no-a" [routerLink]="['Account']">Account</a>
+        <a href="../account/logout.jsp" class="no-a">Logout</a>
+    </div>
+</header>
+<ng-tag-nav [tags]="tags" (onTagSelect)="setTagFilter($event)" (refreshTags)="getTags()"></ng-tag-nav>
+<div class="wrapper">
+    <aside>
+        <a href="javascript:void(0)" [class.active]="activeOwner==null" class="no-a" (click)="setOwnerFilter(null)" title="Last 3 days">All</a>
+        <a href="javascript:void(0)" [class.active]="activeOwner=='me'" class="no-a" (click)="setOwnerFilter('me')">My own entries</a>
+        <a href="javascript:void(0)" [class.active]="activeOwner=='notme'" class="no-a" (click)="setOwnerFilter('notme')">Assigned to me</a>
+        <hr>
+        <a href="javascript:void(0)" [class.active]="activeTime=='current'" class="no-a" (click)="setTimeFilter('current')" title="Last 3 days">Current</a>
+        <a href="javascript:void(0)" [class.active]="activeTime=='day'" class="no-a" (click)="setTimeFilter('day')">Last 24h</a>
+        <a href="javascript:void(0)" [class.active]="activeTime=='week'" class="no-a" (click)="setTimeFilter('week')">Last week</a>
+        <a href="javascript:void(0)" [class.active]="activeTime=='month'" class="no-a" (click)="setTimeFilter('month')">Last month</a>
+        <a href="javascript:void(0)" [class.active]="activeTime=='year'" class="no-a" (click)="setTimeFilter('year')">Last year</a>
+        <a href="javascript:void(0)" [class.active]="activeTime=='all'" class="no-a" (click)="setTimeFilter('all')" title="All items">Archive</a>
+    </aside>
+    <footer>
+        &copy; 2018 Vanessa Speeth & Merlin Scholz
+    </footer>
+    <main>
+        <div class="item-list">
+            <ng-new-item [tags]="tags" (refreshItems)="getItems();getTags()"></ng-new-item>
+            <h1>Current</h1>
+            <ng-list-item *ngFor="let item of items" [item]="item" [tags]="tags" (onTagSelect)="setTagFilter($event)" (onItemDeletion)="getTags()"></ng-list-item>
+            <div class="no-items" *ngIf="items.isEmpty">
+                <p>There are no items to show to you.</p>
+                <p>Please check your filter settings and internet connection and try again.</p>
+            </div>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,32 @@
+<div class="new-tag" [class.active]="newTag.name!=''">
+    <form action="" (onSubmit)="newTagOnSubmit()" #newTagForm="ngForm">
+        <span class="lnr-tag"></span>
+        <input type="text" placeholder="Add Tag..." [(ngModel)]="newTag.name" #tagName="ngForm">
+        <div class="new-tag-details" *ngIf="newTag.name!=''">
+            <select [(ngModel)]="newTag.color" #tagColor="ngForm">
+                <option *ngFor="let color of colors.keys" value="{{colors[color]}}">{{color}}</option>
+            </select>
+            <button type="submit" (click)="newTagOnSubmit()">
+                Add
+            </button>
+        </div>
+    </form>
+</div>
+
+<nav>
+    <div class="new-tag-placeholder"></div>
+    <div class="tags">
+        <a class="tag no-a" style="background:#333" href="javascript:void(0)" (click)="select(null)">
+            No Filter
+        </a>
+        <a href="javascript:void(0)" *ngFor="let tag of tags" class="no-a tag" style="background:#{{tag.color}}" (click)="select(tag)" >
+            <span>
+                {{tag.name}} ({{tag.items}})
+            </span>
+            <a href="javascript:void(0)" class="no-a delete-tag" (click)="deleteTag(tag);$event.stopPropagation()">
+                <span class="lnr-cross"></span>
+            </a>
+        </a>
+    </div>
+</nav>
+
